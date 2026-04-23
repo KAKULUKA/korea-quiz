@@ -3,14 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>귀화 시험 기출 — 오늘의 20문제</title>
+<title>귀화 시험 기출 문제 — 무한 연습</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green:#1a7a55;--green-l:#e6f4ef;--green-m:#2ea878;
-    --red:#c0392b;--red-l:#fdf0ee;
-    --bg:#f7f6f2;--card:#fff;--text:#1a1a18;--sub:#6b6b65;--border:#e2e0d8;
-  }
+  :root{--green:#1a7a55;--green-l:#e6f4ef;--green-m:#2ea878;--red:#c0392b;--red-l:#fdf0ee;--bg:#f7f6f2;--card:#fff;--text:#1a1a18;--sub:#6b6b65;--border:#e2e0d8}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
   header{background:var(--green);color:#fff;padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden}
@@ -19,25 +15,22 @@
   .htag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.18);border-radius:20px;padding:4px 14px;margin-bottom:12px}
   header h1{font-family:'Noto Serif KR',serif;font-size:clamp(22px,5vw,32px);font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
   header p{font-size:13px;opacity:.75;font-weight:300}
-  .date-bar{background:#fff;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;padding:10px 1.5rem;font-size:13px;flex-wrap:wrap;gap:6px}
-  .date-label{color:var(--sub)}.date-label strong{color:var(--text)}
-  .next-refresh{color:var(--green);font-weight:500}
-  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:1.25rem 1.5rem;max-width:700px;margin:0 auto}
-  .stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 8px;text-align:center}
-  .stat-num{font-size:22px;font-weight:700;font-family:'Noto Serif KR',serif}
-  .stat-num.c{color:var(--green)}.stat-num.w{color:var(--red)}
-  .stat-lbl{font-size:11px;color:var(--sub);margin-top:2px}
-  .prog-wrap{padding:0 1.5rem 1rem;max-width:700px;margin:0 auto}
-  .prog-track{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
-  .prog-fill{height:100%;background:linear-gradient(90deg,var(--green-m),var(--green));border-radius:3px;transition:width .4s cubic-bezier(.4,0,.2,1)}
-  .prog-text{font-size:11px;color:var(--sub);margin-top:5px;text-align:right}
-  .cat-row{display:flex;gap:6px;flex-wrap:wrap;padding:0 1.5rem 1rem;max-width:700px;margin:0 auto}
+  .sticky-stats{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:10px 1rem;display:flex;justify-content:center;gap:16px;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .ss-item{display:flex;align-items:center;gap:5px}
+  .ss-dot{width:8px;height:8px;border-radius:50%}
+  .ss-dot.total{background:var(--sub)}.ss-dot.correct{background:var(--green)}.ss-dot.wrong{background:var(--red)}
+  .ss-num{font-weight:700;font-family:'Noto Serif KR',serif}
+  .ss-num.c{color:var(--green)}.ss-num.w{color:var(--red)}
+  .ss-label{color:var(--sub);font-size:11px}
+  .ss-pct{font-weight:700;color:var(--green);font-family:'Noto Serif KR',serif;font-size:15px;margin-left:8px;padding-left:8px;border-left:1px solid var(--border)}
+  .cat-row{display:flex;gap:6px;flex-wrap:wrap;padding:12px 1.5rem;max-width:700px;margin:0 auto}
   .cat-chip{font-size:12px;padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--sub);cursor:pointer;transition:all .15s;font-family:'Noto Sans KR',sans-serif}
   .cat-chip:hover{border-color:var(--green);color:var(--green)}
   .cat-chip.active{background:var(--green);border-color:var(--green);color:#fff}
   main{max-width:700px;margin:0 auto;padding:0 1.5rem 4rem}
-  .q-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.75rem;margin-bottom:1rem;box-shadow:0 2px 16px rgba(0,0,0,.07);transition:box-shadow .2s}
+  .q-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.75rem;margin-bottom:1rem;box-shadow:0 2px 16px rgba(0,0,0,.07);transition:box-shadow .2s;animation:slideUp .35s ease-out}
   .q-card:hover{box-shadow:0 4px 24px rgba(0,0,0,.1)}
+  @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
   .q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
   .q-num{font-size:12px;color:var(--sub)}
   .q-cat{font-size:11px;padding:3px 11px;border-radius:20px;background:var(--green-l);color:var(--green);font-weight:500}
@@ -59,52 +52,37 @@
   .fb.c{background:var(--green-l);color:#0d5c3a;border:1px solid #a8dac5}
   .fb.w{background:var(--red-l);color:#8b2020;border:1px solid #f5b8b0}
   .fb-title{font-weight:700;margin-bottom:4px;font-size:13px}
-  .next-wrap{margin-top:14px;display:none}
-  .next-wrap.show{display:block}
-  .btn-next{width:100%;padding:13px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:background .15s}
-  .btn-next:hover{background:#145e40}
-  .result-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3rem 2rem;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.07)}
-  .result-emoji{font-size:48px;margin-bottom:1rem}
-  .result-title{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:700;margin-bottom:8px}
-  .result-score{font-size:56px;font-weight:700;color:var(--green);font-family:'Noto Serif KR',serif;line-height:1;margin:1rem 0}
-  .result-msg{font-size:14px;color:var(--sub);margin-bottom:1.5rem;line-height:1.6}
-  .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem}
-  .result-stat{background:var(--bg);border-radius:10px;padding:12px;font-size:13px}
-  .result-stat span{font-size:20px;font-weight:700;display:block;margin-bottom:2px}
-  .btn-retry{background:var(--green);color:#fff;border:none;border-radius:10px;padding:14px 40px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:background .15s}
-  .btn-retry:hover{background:#145e40}
+  .loader{text-align:center;padding:2rem;color:var(--sub);font-size:14px}
+  .loader .spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .6s linear infinite;margin:0 auto 10px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .round-banner{background:linear-gradient(135deg,var(--green),var(--green-m));color:white;border-radius:16px;padding:1.25rem;margin-bottom:1rem;text-align:center;font-family:'Noto Serif KR',serif;font-size:15px;animation:slideUp .35s ease-out}
+  .round-banner .round-num{font-size:28px;font-weight:700;display:block;margin-bottom:4px}
   footer{text-align:center;padding:2rem;font-size:12px;color:var(--sub);border-top:1px solid var(--border);background:var(--card)}
   footer strong{color:var(--green)}
-  @media(max-width:480px){.stats-row{grid-template-columns:repeat(2,1fr)}header{padding:2rem 1rem 1.5rem}.q-card{padding:1.25rem}.result-score{font-size:44px}}
+  .scroll-top{position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;border:none;font-size:20px;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.2);display:none;align-items:center;justify-content:center;z-index:200;transition:opacity .2s}
+  .scroll-top.show{display:flex}
+  @media(max-width:480px){header{padding:2rem 1rem 1.5rem}.q-card{padding:1.25rem}.sticky-stats{gap:10px;font-size:12px}}
 </style>
 </head>
 <body>
 <header>
   <div class="htag">사회통합프로그램 종합평가 대비</div>
   <h1>🇰🇷 귀화 시험 기출 문제</h1>
-  <p>매일 새로운 20문제 · 정답 즉시 확인</p>
+  <p>스크롤하면 문제가 계속 나옵니다 · 100문제 무한 연습</p>
 </header>
-<div class="date-bar">
-  <span class="date-label" id="today-label">오늘: <strong>--</strong></span>
-  <span class="next-refresh" id="refresh-label">⏰ 다음 갱신까지 --</span>
-</div>
-<div class="stats-row">
-  <div class="stat-box"><div class="stat-num" id="s-total">20</div><div class="stat-lbl">오늘 문제</div></div>
-  <div class="stat-box"><div class="stat-num" id="s-done">0</div><div class="stat-lbl">푼 문제</div></div>
-  <div class="stat-box"><div class="stat-num c" id="s-correct">0</div><div class="stat-lbl">정답</div></div>
-  <div class="stat-box"><div class="stat-num w" id="s-wrong">0</div><div class="stat-lbl">오답</div></div>
-</div>
-<div class="prog-wrap">
-  <div class="prog-track"><div class="prog-fill" id="prog" style="width:0%"></div></div>
-  <div class="prog-text" id="prog-text">0 / 20 완료</div>
+<div class="sticky-stats">
+  <div class="ss-item"><div class="ss-dot total"></div><span class="ss-num" id="s-done">0</span><span class="ss-label">풀이</span></div>
+  <div class="ss-item"><div class="ss-dot correct"></div><span class="ss-num c" id="s-correct">0</span><span class="ss-label">정답</span></div>
+  <div class="ss-item"><div class="ss-dot wrong"></div><span class="ss-num w" id="s-wrong">0</span><span class="ss-label">오답</span></div>
+  <span class="ss-pct" id="s-pct">0%</span>
 </div>
 <div class="cat-row" id="cat-row"></div>
 <main id="quiz-main"></main>
-<footer><strong>귀화 시험 기출 문제</strong> · 사회통합프로그램 종합평가 기준<br>매일 자정 문제가 새로 갱신됩니다</footer>
-
+<div class="loader" id="loader"><div class="spinner"></div>스크롤하면 새 문제가 나옵니다</div>
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer><strong>귀화 시험 기출 문제</strong> · 사회통합프로그램 종합평가 기준<br>100문제 DB · 무한 반복 연습 모드</footer>
 <script>
 const DB=[
-  // 역사 (20문제)
   {cat:"역사",q:"대한민국의 광복절은 몇 월 며칠인가요?",opts:["7월 17일","8월 15일","3월 1일","10월 3일"],ans:1,exp:"광복절(8월 15일)은 1945년 일본 식민지배로부터 해방된 날을 기념합니다."},
   {cat:"역사",q:"3·1 운동이 일어난 연도는?",opts:["1910년","1919년","1945년","1950년"],ans:1,exp:"1919년 3월 1일 일제 강점기에 독립을 선언한 민족운동입니다."},
   {cat:"역사",q:"한국 전쟁이 시작된 연도는?",opts:["1945년","1948년","1950년","1953년"],ans:2,exp:"한국 전쟁은 1950년 6월 25일에 시작되어 '6·25 전쟁'이라고도 합니다."},
@@ -123,158 +101,157 @@ const DB=[
   {cat:"역사",q:"6월 민주 항쟁이 일어난 연도는?",opts:["1960년","1979년","1980년","1987년"],ans:3,exp:"1987년 6월 민주 항쟁으로 직선제 개헌이 이루어졌습니다."},
   {cat:"역사",q:"4·19 혁명이 일어난 연도는?",opts:["1948년","1960년","1961년","1980년"],ans:1,exp:"1960년 4·19 혁명으로 이승만 정권이 무너졌습니다."},
   {cat:"역사",q:"한국의 최초 금속 활자 발명 시기는?",opts:["고려 시대","조선 초기","조선 중기","일제 강점기"],ans:0,exp:"고려 시대에 세계 최초로 금속 활자가 발명되었습니다(13세기)."},
-  {cat:"역사",q:"이순신 장군이 활약한 전쟁은?",opts:["병자호란","정묘호란","임진왜란","한국 전쟁"],ans:2,exp:"이순신 장군은 임진왜란(1592~1598)에서 거북선을 이용해 일본군을 격파했습니다."},
+  {cat:"역사",q:"이순신 장군이 활약한 전쟁은?",opts:["병자호란","정묘호란","임진왜란","한국 전쟁"],ans:2,exp:"이순신 장군은 임진왜란에서 거북선을 이용해 일본군을 격파했습니다."},
   {cat:"역사",q:"대한민국 최초의 대통령은?",opts:["박정희","윤보선","이승만","김구"],ans:2,exp:"이승만은 1948년 대한민국 초대 대통령에 취임했습니다."},
-  // 정치·제도 (15문제)
   {cat:"정치·제도",q:"대한민국의 국회의원 임기는?",opts:["2년","3년","4년","5년"],ans:2,exp:"대한민국 국회의원의 임기는 4년입니다."},
-  {cat:"정치·제도",q:"대한민국 대통령의 임기는?",opts:["4년 중임제","5년 단임제","6년 단임제","4년 단임제"],ans:1,exp:"대한민국 대통령은 5년 단임제로, 한 번만 대통령을 할 수 있습니다."},
-  {cat:"정치·제도",q:"대한민국 헌법이 처음 제정된 연도는?",opts:["1945년","1948년","1950년","1960년"],ans:1,exp:"대한민국 헌법은 1948년 7월 17일 처음 제정되었으며, 제헌절로 기념됩니다."},
-  {cat:"정치·제도",q:"헌법재판소의 주요 역할은?",opts:["법률 제정","행정 집행","헌법 분쟁 심판","외교 담당"],ans:2,exp:"헌법재판소는 법률의 위헌 여부, 탄핵 등 헌법에 관한 분쟁을 심판합니다."},
-  {cat:"정치·제도",q:"대한민국 국회는 몇 원제인가요?",opts:["단원제","양원제","삼원제","혼합제"],ans:0,exp:"대한민국 국회는 단원제로 하나의 의원으로 구성됩니다."},
-  {cat:"정치·제도",q:"삼권분립에서 사법권을 담당하는 기관은?",opts:["국회","청와대","법원","감사원"],ans:2,exp:"삼권분립에서 입법은 국회, 행정은 정부, 사법은 법원이 담당합니다."},
-  {cat:"정치·제도",q:"선거권을 가지는 나이는?",opts:["만 16세","만 18세","만 19세","만 20세"],ans:1,exp:"2020년 공직선거법 개정으로 만 18세 이상이 선거권을 가집니다."},
-  {cat:"정치·제도",q:"대한민국 국가 예산을 확정하는 기관은?",opts:["기획재정부","감사원","국회","대법원"],ans:2,exp:"국가 예산은 국회의 심의·확정을 거쳐 집행됩니다."},
+  {cat:"정치·제도",q:"대한민국 대통령의 임기는?",opts:["4년 중임제","5년 단임제","6년 단임제","4년 단임제"],ans:1,exp:"대한민국 대통령은 5년 단임제입니다."},
+  {cat:"정치·제도",q:"대한민국 헌법이 처음 제정된 연도는?",opts:["1945년","1948년","1950년","1960년"],ans:1,exp:"대한민국 헌법은 1948년 7월 17일 처음 제정되었습니다."},
+  {cat:"정치·제도",q:"헌법재판소의 주요 역할은?",opts:["법률 제정","행정 집행","헌법 분쟁 심판","외교 담당"],ans:2,exp:"헌법재판소는 헌법에 관한 분쟁을 심판합니다."},
+  {cat:"정치·제도",q:"대한민국 국회는 몇 원제인가요?",opts:["단원제","양원제","삼원제","혼합제"],ans:0,exp:"대한민국 국회는 단원제입니다."},
+  {cat:"정치·제도",q:"삼권분립에서 사법권을 담당하는 기관은?",opts:["국회","청와대","법원","감사원"],ans:2,exp:"사법은 법원이 담당합니다."},
+  {cat:"정치·제도",q:"선거권을 가지는 나이는?",opts:["만 16세","만 18세","만 19세","만 20세"],ans:1,exp:"만 18세 이상이 선거권을 가집니다."},
+  {cat:"정치·제도",q:"대한민국 국가 예산을 확정하는 기관은?",opts:["기획재정부","감사원","국회","대법원"],ans:2,exp:"국가 예산은 국회에서 확정합니다."},
   {cat:"정치·제도",q:"대한민국의 국기 이름은?",opts:["무궁화기","태극기","한반도기","애국기"],ans:1,exp:"대한민국의 국기는 태극기입니다."},
-  {cat:"정치·제도",q:"대한민국 최고 법원은?",opts:["헌법재판소","대법원","고등법원","지방법원"],ans:1,exp:"대법원은 대한민국 최고 법원으로 최종 판결을 내립니다."},
-  {cat:"정치·제도",q:"국무총리를 임명하는 사람은?",opts:["국회의장","대통령","대법원장","헌법재판소장"],ans:1,exp:"국무총리는 국회의 동의를 받아 대통령이 임명합니다."},
-  {cat:"정치·제도",q:"지방자치단체장의 임기는?",opts:["3년","4년","5년","6년"],ans:1,exp:"광역·기초자치단체장의 임기는 모두 4년입니다."},
-  {cat:"정치·제도",q:"대한민국 경찰의 주요 임무가 아닌 것은?",opts:["범죄 수사","교통 단속","소방 업무","치안 유지"],ans:2,exp:"소방 업무는 소방청 및 소방서의 업무입니다."},
-  {cat:"정치·제도",q:"헌법에서 보장하는 기본권이 아닌 것은?",opts:["평등권","자유권","생존권","납세권"],ans:3,exp:"납세는 권리가 아닌 국민의 의무입니다."},
-  {cat:"정치·제도",q:"대한민국의 국가 상징이 아닌 것은?",opts:["태극기","애국가","무궁화","한반도기"],ans:3,exp:"한반도기는 남북 단일팀 출전 시 사용하는 기로 공식 국가 상징이 아닙니다."},
-  // 사회·문화 (15문제)
-  {cat:"사회·문화",q:"설날에 주로 먹는 음식은?",opts:["송편","떡국","삼계탕","만둣국"],ans:1,exp:"설날에는 새해를 맞아 떡국을 먹습니다."},
-  {cat:"사회·문화",q:"추석에 주로 먹는 음식은?",opts:["떡국","삼계탕","송편","비빔밥"],ans:2,exp:"추석(음력 8월 15일)에는 햅쌀로 만든 송편을 먹습니다."},
-  {cat:"사회·문화",q:"국경일이 아닌 것은?",opts:["삼일절","광복절","한글날","추석"],ans:3,exp:"추석은 민속 명절이며, 국경일은 삼일절·제헌절·광복절·개천절·한글날입니다."},
-  {cat:"사회·문화",q:"개천절은 몇 월 며칠인가요?",opts:["9월 9일","10월 3일","10월 9일","11월 3일"],ans:1,exp:"개천절은 10월 3일로, 단군왕검이 고조선을 건국한 날을 기념합니다."},
-  {cat:"사회·문화",q:"한글날은 몇 월 며칠인가요?",opts:["10월 3일","10월 9일","11월 3일","9월 9일"],ans:1,exp:"한글날은 10월 9일로, 세종대왕의 훈민정음 반포를 기념합니다."},
-  {cat:"사회·문화",q:"한국의 전통 의복은?",opts:["기모노","한복","치파오","사리"],ans:1,exp:"한복은 한국의 전통 의복으로, 명절이나 특별한 행사에 입습니다."},
-  {cat:"사회·문화",q:"한국의 국화(나라꽃)는?",opts:["장미","벚꽃","무궁화","진달래"],ans:2,exp:"무궁화는 대한민국의 국화로, 나라 곳곳에서 볼 수 있습니다."},
-  {cat:"사회·문화",q:"한국의 전통 발효 음식이 아닌 것은?",opts:["김치","된장","고추장","비빔밥"],ans:3,exp:"비빔밥은 발효 음식이 아닙니다."},
-  {cat:"사회·문화",q:"유네스코 인류무형문화유산에 등재된 음악은?",opts:["아리랑만","강강술래만","판소리만","모두 해당"],ans:3,exp:"아리랑, 강강술래, 판소리 모두 유네스코 인류무형문화유산에 등재되어 있습니다."},
-  {cat:"사회·문화",q:"정월대보름에 먹는 음식은?",opts:["오곡밥·묵은나물","송편","떡국","삼계탕"],ans:0,exp:"정월대보름(음력 1월 15일)에는 오곡밥과 묵은나물을 먹는 풍습이 있습니다."},
-  {cat:"사회·문화",q:"삼일절은 몇 월 며칠인가요?",opts:["1월 1일","2월 28일","3월 1일","4월 3일"],ans:2,exp:"삼일절은 3월 1일로, 1919년 3·1 독립운동을 기념하는 국경일입니다."},
-  {cat:"사회·문화",q:"어른께 물건을 드릴 때 예의 바른 자세는?",opts:["한 손","두 손","발로","던져서"],ans:1,exp:"어른께 물건을 드릴 때는 두 손으로 공손히 드리는 것이 예의입니다."},
-  {cat:"사회·문화",q:"한국의 전통 놀이가 아닌 것은?",opts:["윷놀이","연날리기","마작","제기차기"],ans:2,exp:"마작은 중국 전통 놀이입니다."},
-  {cat:"사회·문화",q:"복날에 주로 먹는 보양식은?",opts:["삼계탕","설렁탕","떡국","비빔밥"],ans:0,exp:"삼복(초복·중복·말복)에는 더위를 이기기 위해 삼계탕을 먹는 풍습이 있습니다."},
-  {cat:"사회·문화",q:"한국에서 성년의 날은 몇 월 셋째 월요일인가요?",opts:["3월","4월","5월","6월"],ans:2,exp:"성년의 날은 매년 5월 셋째 월요일로, 만 19세가 된 청년들을 축하합니다."},
-  // 지리·경제 (15문제)
-  {cat:"지리·경제",q:"한국에서 가장 긴 강은?",opts:["한강","낙동강","금강","영산강"],ans:1,exp:"낙동강은 약 525km로 한국에서 가장 긴 강입니다."},
-  {cat:"지리·경제",q:"남한에서 가장 높은 산은?",opts:["지리산","설악산","한라산","북한산"],ans:2,exp:"남한에서 가장 높은 산은 제주도의 한라산(1,950m)입니다."},
-  {cat:"지리·경제",q:"한국의 화폐 단위는?",opts:["엔","위안","원","달러"],ans:2,exp:"대한민국의 화폐 단위는 원(₩)입니다."},
-  {cat:"지리·경제",q:"한국의 행정구역 중 특별시는?",opts:["부산","서울","인천","대구"],ans:1,exp:"서울은 대한민국 유일의 특별시입니다."},
-  {cat:"지리·경제",q:"대한민국의 중앙은행은?",opts:["기업은행","산업은행","한국은행","국민은행"],ans:2,exp:"한국은행은 대한민국의 중앙은행으로 통화 정책을 담당합니다."},
-  {cat:"지리·경제",q:"서울의 조선 시대 이름은?",opts:["평양","개경","한양","금성"],ans:2,exp:"조선 시대 서울의 이름은 한양이었습니다."},
-  {cat:"지리·경제",q:"한국과 일본 사이의 바다 이름은?",opts:["황해","동해","남해","태평양"],ans:1,exp:"한국과 일본 사이의 바다는 동해(East Sea)입니다."},
-  {cat:"지리·경제",q:"한국의 특별자치도는?",opts:["경기도","충청남도","제주특별자치도","강원도"],ans:2,exp:"제주도는 2006년 제주특별자치도로 출범하여 고도의 자치권을 가집니다."},
-  {cat:"지리·경제",q:"한국의 대표 수출품이 아닌 것은?",opts:["반도체","자동차","석유(원유)","선박"],ans:2,exp:"한국은 석유(원유)를 생산하지 않고 수입합니다."},
-  {cat:"지리·경제",q:"대한민국의 영해 범위는?",opts:["3해리","5해리","12해리","24해리"],ans:2,exp:"대한민국의 영해는 기선으로부터 12해리(약 22km)까지입니다."},
-  {cat:"지리·경제",q:"독도는 어느 도에 속하나요?",opts:["강원도","경상북도","전라남도","경상남도"],ans:1,exp:"독도는 경상북도 울릉군에 속한 대한민국의 섬입니다."},
-  {cat:"지리·경제",q:"한국의 수도권에 해당하지 않는 도시는?",opts:["서울","인천","수원","대전"],ans:3,exp:"대전은 충청남도에 위치하며 수도권(서울·인천·경기)에 포함되지 않습니다."},
-  {cat:"지리·경제",q:"한국의 인구는 약 몇 명인가요?",opts:["3천만 명","5천만 명","7천만 명","1억 명"],ans:1,exp:"대한민국의 인구는 약 5천만 명입니다."},
-  {cat:"지리·경제",q:"한국과 중국 사이의 바다 이름은?",opts:["동해","황해","남해","태평양"],ans:1,exp:"한국과 중국 사이의 바다는 황해(서해)입니다."},
-  {cat:"지리·경제",q:"한국의 행정구역 광역시가 아닌 것은?",opts:["부산","대구","수원","광주"],ans:2,exp:"수원은 경기도의 일반 시이며 광역시가 아닙니다."},
-  // 생활·법률 (15문제)
-  {cat:"생활·법률",q:"일반귀화에 필요한 최소 거주 기간은?",opts:["3년","5년","7년","10년"],ans:1,exp:"일반귀화의 경우 5년 이상 계속하여 대한민국에 주소가 있어야 합니다."},
-  {cat:"생활·법률",q:"대한민국 민법상 성인 나이는?",opts:["만 18세","만 19세","만 20세","만 21세"],ans:1,exp:"대한민국 민법상 성년은 만 19세입니다."},
-  {cat:"생활·법률",q:"건강보험 가입자 구분은?",opts:["소득별","직장·지역 가입자","성별","연령별"],ans:1,exp:"건강보험은 직장가입자와 지역가입자로 구분됩니다."},
-  {cat:"생활·법률",q:"외국인등록증 발급 기관은?",opts:["경찰서","출입국·외국인청","주민센터","법원"],ans:1,exp:"외국인등록증은 출입국·외국인청에서 발급받습니다."},
-  {cat:"생활·법률",q:"국민의 4대 의무가 아닌 것은?",opts:["납세","국방","교육","투표"],ans:3,exp:"4대 의무는 납세·국방·교육·근로의 의무입니다. 투표는 권리입니다."},
-  {cat:"생활·법률",q:"근로기준법상 주 법정 근로 시간은?",opts:["35시간","40시간","44시간","52시간"],ans:1,exp:"근로기준법상 1주 법정 근로 시간은 40시간입니다."},
-  {cat:"생활·법률",q:"국민연금 노령연금 수령 시작 나이는?",opts:["55세","60세","65세","70세"],ans:2,exp:"국민연금 노령연금은 원칙적으로 만 65세부터 수령 가능합니다."},
-  {cat:"생활·법률",q:"음주 운전 혈중 알코올 농도 기준은?",opts:["0.03% 이상","0.05% 이상","0.08% 이상","0.10% 이상"],ans:0,exp:"2019년부터 혈중 알코올 농도 0.03% 이상이면 음주운전으로 처벌받습니다."},
-  {cat:"생활·법률",q:"쓰레기 배출 시 반드시 사용해야 하는 것은?",opts:["일반 봉투","종량제 봉투","비닐봉지","상자"],ans:1,exp:"대한민국에서는 종량제 봉투를 구매하여 쓰레기를 버려야 합니다."},
-  {cat:"생활·법률",q:"대한민국의 의무 교육 기간은?",opts:["초등 6년","초·중 9년","초·중·고 12년","유치원~고등 13년"],ans:1,exp:"대한민국의 의무 교육은 초등학교 6년 + 중학교 3년 = 총 9년입니다."},
-  {cat:"생활·법률",q:"외국인이 90일 초과 체류 시 의무적으로 소지해야 하는 것은?",opts:["주민등록증","외국인등록증","운전면허증","여권"],ans:1,exp:"국내에 90일 초과 체류하는 외국인은 외국인등록증을 소지해야 합니다."},
-  {cat:"생활·법률",q:"다음 중 기초생활수급자 지원 내용이 아닌 것은?",opts:["생계급여","의료급여","교육급여","사치품 구매비"],ans:3,exp:"기초생활수급자에게는 생계·의료·주거·교육급여 등이 지원되나 사치품 구매비는 해당 없습니다."},
-  {cat:"생활·법률",q:"고용보험의 주요 역할은?",opts:["의료비 지원","실업급여 지급","노후 연금","산업재해 보상"],ans:1,exp:"고용보험은 실직 시 실업급여 지급, 직업훈련 지원 등을 담당합니다."},
-  {cat:"생활·법률",q:"산업재해 발생 시 보상을 담당하는 보험은?",opts:["건강보험","국민연금","고용보험","산재보험"],ans:3,exp:"업무상 재해에 대한 보상은 산업재해보상보험(산재보험)에서 담당합니다."},
-  {cat:"생활·법률",q:"주민등록증 발급 나이는?",opts:["만 16세","만 17세","만 18세","만 19세"],ans:1,exp:"만 17세 이상의 대한민국 국민은 주민등록증을 발급받아야 합니다."}
+  {cat:"정치·제도",q:"대한민국 최고 법원은?",opts:["헌법재판소","대법원","고등법원","지방법원"],ans:1,exp:"대법원은 최고 법원입니다."},
+  {cat:"정치·제도",q:"국무총리를 임명하는 사람은?",opts:["국회의장","대통령","대법원장","헌법재판소장"],ans:1,exp:"국무총리는 대통령이 임명합니다."},
+  {cat:"정치·제도",q:"지방자치단체장의 임기는?",opts:["3년","4년","5년","6년"],ans:1,exp:"임기는 4년입니다."},
+  {cat:"정치·제도",q:"경찰의 주요 임무가 아닌 것은?",opts:["범죄 수사","교통 단속","소방 업무","치안 유지"],ans:2,exp:"소방은 소방청 업무입니다."},
+  {cat:"정치·제도",q:"헌법에서 보장하는 기본권이 아닌 것은?",opts:["평등권","자유권","생존권","납세권"],ans:3,exp:"납세는 의무입니다."},
+  {cat:"정치·제도",q:"국가 상징이 아닌 것은?",opts:["태극기","애국가","무궁화","한반도기"],ans:3,exp:"한반도기는 공식 국가 상징이 아닙니다."},
+  {cat:"사회·문화",q:"설날에 주로 먹는 음식은?",opts:["송편","떡국","삼계탕","만둣국"],ans:1,exp:"설날에는 떡국을 먹습니다."},
+  {cat:"사회·문화",q:"추석에 주로 먹는 음식은?",opts:["떡국","삼계탕","송편","비빔밥"],ans:2,exp:"추석에는 송편을 먹습니다."},
+  {cat:"사회·문화",q:"국경일이 아닌 것은?",opts:["삼일절","광복절","한글날","추석"],ans:3,exp:"추석은 민속 명절입니다."},
+  {cat:"사회·문화",q:"개천절은 몇 월 며칠인가요?",opts:["9월 9일","10월 3일","10월 9일","11월 3일"],ans:1,exp:"개천절은 10월 3일입니다."},
+  {cat:"사회·문화",q:"한글날은 몇 월 며칠인가요?",opts:["10월 3일","10월 9일","11월 3일","9월 9일"],ans:1,exp:"한글날은 10월 9일입니다."},
+  {cat:"사회·문화",q:"한국의 전통 의복은?",opts:["기모노","한복","치파오","사리"],ans:1,exp:"한복은 한국의 전통 의복입니다."},
+  {cat:"사회·문화",q:"한국의 국화(나라꽃)는?",opts:["장미","벚꽃","무궁화","진달래"],ans:2,exp:"무궁화는 대한민국의 국화입니다."},
+  {cat:"사회·문화",q:"전통 발효 음식이 아닌 것은?",opts:["김치","된장","고추장","비빔밥"],ans:3,exp:"비빔밥은 발효 음식이 아닙니다."},
+  {cat:"사회·문화",q:"유네스코 무형문화유산에 등재된 것은?",opts:["아리랑만","강강술래만","판소리만","모두 해당"],ans:3,exp:"아리랑, 강강술래, 판소리 모두 등재되어 있습니다."},
+  {cat:"사회·문화",q:"정월대보름에 먹는 음식은?",opts:["오곡밥·묵은나물","송편","떡국","삼계탕"],ans:0,exp:"정월대보름에는 오곡밥과 묵은나물을 먹습니다."},
+  {cat:"사회·문화",q:"삼일절은 몇 월 며칠인가요?",opts:["1월 1일","2월 28일","3월 1일","4월 3일"],ans:2,exp:"삼일절은 3월 1일입니다."},
+  {cat:"사회·문화",q:"어른께 물건을 드릴 때 예의 바른 자세는?",opts:["한 손","두 손","발로","던져서"],ans:1,exp:"두 손으로 공손히 드리는 것이 예의입니다."},
+  {cat:"사회·문화",q:"전통 놀이가 아닌 것은?",opts:["윷놀이","연날리기","마작","제기차기"],ans:2,exp:"마작은 중국 전통 놀이입니다."},
+  {cat:"사회·문화",q:"복날에 주로 먹는 보양식은?",opts:["삼계탕","설렁탕","떡국","비빔밥"],ans:0,exp:"복날에는 삼계탕을 먹습니다."},
+  {cat:"사회·문화",q:"성년의 날은 몇 월 셋째 월요일?",opts:["3월","4월","5월","6월"],ans:2,exp:"성년의 날은 5월 셋째 월요일입니다."},
+  {cat:"지리·경제",q:"한국에서 가장 긴 강은?",opts:["한강","낙동강","금강","영산강"],ans:1,exp:"낙동강은 약 525km입니다."},
+  {cat:"지리·경제",q:"남한에서 가장 높은 산은?",opts:["지리산","설악산","한라산","북한산"],ans:2,exp:"한라산(1,950m)입니다."},
+  {cat:"지리·경제",q:"한국의 화폐 단위는?",opts:["엔","위안","원","달러"],ans:2,exp:"화폐 단위는 원(₩)입니다."},
+  {cat:"지리·경제",q:"특별시는?",opts:["부산","서울","인천","대구"],ans:1,exp:"서울은 유일한 특별시입니다."},
+  {cat:"지리·경제",q:"중앙은행은?",opts:["기업은행","산업은행","한국은행","국민은행"],ans:2,exp:"한국은행이 중앙은행입니다."},
+  {cat:"지리·경제",q:"서울의 조선 시대 이름은?",opts:["평양","개경","한양","금성"],ans:2,exp:"한양이었습니다."},
+  {cat:"지리·경제",q:"한국과 일본 사이의 바다는?",opts:["황해","동해","남해","태평양"],ans:1,exp:"동해(East Sea)입니다."},
+  {cat:"지리·경제",q:"특별자치도는?",opts:["경기도","충청남도","제주특별자치도","강원도"],ans:2,exp:"제주특별자치도입니다."},
+  {cat:"지리·경제",q:"대표 수출품이 아닌 것은?",opts:["반도체","자동차","석유(원유)","선박"],ans:2,exp:"석유는 수입합니다."},
+  {cat:"지리·경제",q:"영해 범위는?",opts:["3해리","5해리","12해리","24해리"],ans:2,exp:"12해리입니다."},
+  {cat:"지리·경제",q:"독도는 어느 도에 속하나요?",opts:["강원도","경상북도","전라남도","경상남도"],ans:1,exp:"경상북도 울릉군입니다."},
+  {cat:"지리·경제",q:"수도권이 아닌 도시는?",opts:["서울","인천","수원","대전"],ans:3,exp:"대전은 수도권이 아닙니다."},
+  {cat:"지리·경제",q:"한국 인구는 약?",opts:["3천만","5천만","7천만","1억"],ans:1,exp:"약 5천만 명입니다."},
+  {cat:"지리·경제",q:"한국과 중국 사이 바다는?",opts:["동해","황해","남해","태평양"],ans:1,exp:"황해(서해)입니다."},
+  {cat:"지리·경제",q:"광역시가 아닌 것은?",opts:["부산","대구","수원","광주"],ans:2,exp:"수원은 일반 시입니다."},
+  {cat:"생활·법률",q:"일반귀화 최소 거주 기간은?",opts:["3년","5년","7년","10년"],ans:1,exp:"5년 이상 거주해야 합니다."},
+  {cat:"생활·법률",q:"민법상 성인 나이는?",opts:["만 18세","만 19세","만 20세","만 21세"],ans:1,exp:"만 19세입니다."},
+  {cat:"생활·법률",q:"건강보험 가입자 구분은?",opts:["소득별","직장·지역 가입자","성별","연령별"],ans:1,exp:"직장가입자와 지역가입자입니다."},
+  {cat:"생활·법률",q:"외국인등록증 발급 기관은?",opts:["경찰서","출입국·외국인청","주민센터","법원"],ans:1,exp:"출입국·외국인청입니다."},
+  {cat:"생활·법률",q:"4대 의무가 아닌 것은?",opts:["납세","국방","교육","투표"],ans:3,exp:"투표는 권리입니다."},
+  {cat:"생활·법률",q:"주 법정 근로 시간은?",opts:["35시간","40시간","44시간","52시간"],ans:1,exp:"40시간입니다."},
+  {cat:"생활·법률",q:"국민연금 수령 시작 나이는?",opts:["55세","60세","65세","70세"],ans:2,exp:"만 65세부터입니다."},
+  {cat:"생활·법률",q:"음주 운전 기준은?",opts:["0.03%","0.05%","0.08%","0.10%"],ans:0,exp:"0.03% 이상이면 처벌됩니다."},
+  {cat:"생활·법률",q:"쓰레기 배출 시 사용해야 하는 것은?",opts:["일반 봉투","종량제 봉투","비닐봉지","상자"],ans:1,exp:"종량제 봉투를 사용합니다."},
+  {cat:"생활·법률",q:"의무 교육 기간은?",opts:["초등 6년","초·중 9년","초·중·고 12년","13년"],ans:1,exp:"총 9년입니다."},
+  {cat:"생활·법률",q:"90일 초과 체류 외국인이 소지해야 할 것은?",opts:["주민등록증","외국인등록증","운전면허증","여권"],ans:1,exp:"외국인등록증입니다."},
+  {cat:"생활·법률",q:"기초생활수급자 지원이 아닌 것은?",opts:["생계급여","의료급여","교육급여","사치품 구매비"],ans:3,exp:"사치품 구매비는 해당 없습니다."},
+  {cat:"생활·법률",q:"고용보험의 주요 역할은?",opts:["의료비 지원","실업급여 지급","노후 연금","산업재해 보상"],ans:1,exp:"실업급여 지급입니다."},
+  {cat:"생활·법률",q:"산재 보상을 담당하는 보험은?",opts:["건강보험","국민연금","고용보험","산재보험"],ans:3,exp:"산재보험입니다."},
+  {cat:"생활·법률",q:"주민등록증 발급 나이는?",opts:["만 16세","만 17세","만 18세","만 19세"],ans:1,exp:"만 17세 이상입니다."},
+  {cat:"역사",q:"고구려를 건국한 인물은?",opts:["박혁거세","온조","주몽","단군왕검"],ans:2,exp:"주몽(동명성왕)이 건국했습니다."},
+  {cat:"역사",q:"신라를 건국한 인물은?",opts:["박혁거세","온조","주몽","단군왕검"],ans:0,exp:"박혁거세가 건국했습니다."},
+  {cat:"역사",q:"백제를 건국한 인물은?",opts:["박혁거세","온조","주몽","단군왕검"],ans:1,exp:"온조가 건국했습니다."},
+  {cat:"역사",q:"조선의 마지막 왕은?",opts:["고종","순종","철종","흥선대원군"],ans:1,exp:"순종(27대)입니다."},
+  {cat:"역사",q:"광개토대왕은 어느 나라 왕?",opts:["신라","백제","고구려","고려"],ans:2,exp:"고구려 제19대 왕입니다."},
+  {cat:"정치·제도",q:"대통령 탄핵 소추 기관은?",opts:["대법원","국회","헌법재판소","감사원"],ans:1,exp:"국회가 소추합니다."},
+  {cat:"정치·제도",q:"행정부 최고 수반은?",opts:["국무총리","대통령","국회의장","대법원장"],ans:1,exp:"대통령입니다."},
+  {cat:"정치·제도",q:"감사원의 주요 역할은?",opts:["법률 제정","세입·세출 검사","외교","국방"],ans:1,exp:"세입·세출 검사입니다."},
+  {cat:"정치·제도",q:"국민투표로 확정하는 것은?",opts:["일반 법률","헌법 개정안","예산","대법관 임명"],ans:1,exp:"헌법 개정안입니다."},
+  {cat:"정치·제도",q:"대한민국 수도는?",opts:["부산","인천","서울","수원"],ans:2,exp:"서울특별시입니다."},
+  {cat:"사회·문화",q:"국가(國歌) 이름은?",opts:["아리랑","애국가","군가","한강"],ans:1,exp:"애국가입니다."},
+  {cat:"사회·문화",q:"추석은 음력 몇 월 며칠?",opts:["7월 15일","8월 15일","9월 9일","10월 3일"],ans:1,exp:"음력 8월 15일입니다."},
+  {cat:"사회·문화",q:"설날 어른께 드리는 절은?",opts:["배례","세배","큰절","반절"],ans:1,exp:"세배입니다."},
+  {cat:"지리·경제",q:"두 번째로 긴 강은?",opts:["낙동강","한강","금강","섬진강"],ans:1,exp:"한강(약 514km)입니다."},
+  {cat:"생활·법률",q:"형사 미성년자 나이는?",opts:["만 10세 미만","만 14세 미만","만 18세 미만","만 19세 미만"],ans:1,exp:"만 14세 미만입니다."},
+  {cat:"생활·법률",q:"운전 시 반드시 소지해야 할 것은?",opts:["주민등록증","운전면허증","여권","외국인등록증"],ans:1,exp:"운전면허증입니다."},
+  {cat:"생활·법률",q:"노인 복지 혜택 시작 나이는?",opts:["만 60세","만 65세","만 70세","만 75세"],ans:1,exp:"만 65세 이상입니다."},
+  {cat:"생활·법률",q:"혼인 신고는 어디에?",opts:["법원","경찰서","주민센터","출입국청"],ans:2,exp:"주민센터(시·군·구청)입니다."},
+  {cat:"생활·법률",q:"분리수거 이유로 가장 적합한 것은?",opts:["자원 절약·환경 보호","봉투 절약","관계 개선","처벌 때문"],ans:0,exp:"자원 절약과 환경 보호입니다."},
+  {cat:"생활·법률",q:"건강보험료를 안 내도 되는 대상은?",opts:["직장가입자","피부양자","지역가입자","외국인 근로자"],ans:1,exp:"피부양자입니다."}
 ];
 
-const DAILY=20;
-function seededRng(seed){let s=seed;return()=>{s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff}}
-function getTodayQ(){
-  const d=new Date(),key=`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
-  const seed=key.split('').reduce((a,c)=>a*31+c.charCodeAt(0),0);
-  const rng=seededRng(seed);
-  const cats=[...new Set(DB.map(q=>q.cat))];
-  let pool=[];
-  cats.forEach(cat=>{
-    const cq=DB.filter(q=>q.cat===cat).map((q,i)=>({...q,_i:DB.indexOf(q)}));
-    pool.push(...cq.sort(()=>rng()-.5).slice(0,4));
-  });
-  const used=new Set(pool.map(q=>q._i));
-  const rest=DB.map((q,i)=>({...q,_i:i})).filter(q=>!used.has(q._i)).sort(()=>rng()-.5);
-  while(pool.length<DAILY&&rest.length)pool.push(rest.shift());
-  return pool.sort(()=>rng()-.5).slice(0,DAILY);
-}
+let globalIdx=0,correct=0,wrong=0,filterCat="전체",shuffled=[],roundNum=1,loading=false;
+const BATCH=5,answeredMap={},questionStore={};
 
-let questions=getTodayQ(),answered=new Array(DAILY).fill(false),results=new Array(DAILY).fill(null),filterCat="전체";
-window._ua={};
-
-function updateDateBar(){
-  const n=new Date();
-  document.getElementById('today-label').innerHTML=`오늘: <strong>${n.getFullYear()}년 ${n.getMonth()+1}월 ${n.getDate()}일</strong>`;
-  const t=new Date(n);t.setDate(t.getDate()+1);t.setHours(0,0,0,0);
-  const diff=t-n,h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000);
-  document.getElementById('refresh-label').textContent=`⏰ 다음 갱신까지 ${h}시간 ${m}분`;
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function getFilteredDB(){return filterCat==="전체"?[...DB]:DB.filter(q=>q.cat===filterCat)}
+function refillPool(){shuffled=shuffle(getFilteredDB())}
+function getNextQuestions(n){
+  const r=[];
+  for(let i=0;i<n;i++){
+    if(!shuffled.length){roundNum++;refillPool()}
+    r.push(shuffled.shift());
+  }
+  return r;
 }
 function updateStats(){
-  const done=results.filter(r=>r!==null).length,c=results.filter(r=>r===true).length,w=results.filter(r=>r===false).length;
-  document.getElementById('s-total').textContent=DAILY;
+  const done=correct+wrong;
   document.getElementById('s-done').textContent=done;
-  document.getElementById('s-correct').textContent=c;
-  document.getElementById('s-wrong').textContent=w;
-  const pct=Math.round(done/DAILY*100);
-  document.getElementById('prog').style.width=pct+'%';
-  document.getElementById('prog-text').textContent=`${done} / ${DAILY} 완료`;
+  document.getElementById('s-correct').textContent=correct;
+  document.getElementById('s-wrong').textContent=wrong;
+  document.getElementById('s-pct').textContent=(done>0?Math.round(correct/done*100):0)+'%';
 }
 function renderCats(){
-  const cats=["전체",...new Set(questions.map(q=>q.cat))];
+  const cats=["전체",...new Set(DB.map(q=>q.cat))];
   document.getElementById('cat-row').innerHTML=cats.map(c=>`<button class="cat-chip ${c===filterCat?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join('');
 }
-function setFilter(c){filterCat=c;renderCats();renderQuiz()}
+function setFilter(c){
+  filterCat=c;globalIdx=0;correct=0;wrong=0;roundNum=1;
+  Object.keys(answeredMap).forEach(k=>delete answeredMap[k]);
+  Object.keys(questionStore).forEach(k=>delete questionStore[k]);
+  refillPool();
+  document.getElementById('quiz-main').innerHTML='';
+  updateStats();renderCats();loadMore();
+}
 function renderCard(q,idx){
-  const isAns=answered[idx],sel=window._ua[idx];
+  const info=answeredMap[idx],isAns=!!info,sel=info?.sel;
   const opts=q.opts.map((o,oi)=>{
     let cls='opt';
-    if(isAns){cls+=' locked';if(oi===q.ans)cls+=' reveal';if(sel===oi&&oi!==q.ans)cls+=' sel-w';if(sel===oi&&oi===q.ans)cls+=' sel-c reveal';}
-    return`<div class="${cls}" ${isAns?'':` onclick="selectAnswer(${idx},${oi})"`} id="o${idx}-${oi}"><div class="badge">${oi+1}</div><div class="opt-text">${o}</div></div>`;
+    if(isAns){cls+=' locked';if(oi===q.ans)cls+=' reveal';if(sel===oi&&oi!==q.ans)cls+=' sel-w';if(sel===oi&&oi===q.ans)cls+=' sel-c reveal'}
+    return`<div class="${cls}"${isAns?'':` onclick="selectAnswer(${idx},${oi})"`}><div class="badge">${oi+1}</div><div class="opt-text">${o}</div></div>`;
   }).join('');
-  const fbCls=results[idx]===true?'c':'w',fbT=results[idx]===true?'✓ 정답입니다!':'✗ 오답입니다.';
-  const nextBtn=isAns?(idx<DAILY-1?`<div class="next-wrap show"><button class="btn-next" onclick="scrollNext(${idx})">다음 문제 →</button></div>`:`<div class="next-wrap show"><button class="btn-next" onclick="showResult()">결과 보기 →</button></div>`):'';
-  return`<div class="q-card" id="qc${idx}"><div class="q-header"><span class="q-num">문제 ${idx+1} / ${DAILY}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.q}</div><div class="options">${opts}</div><div class="fb ${isAns?fbCls+' show':''}">${isAns?`<div class="fb-title">${fbT}</div>${q.exp}`:''}</div>${nextBtn}</div>`;
+  const fbCls=info?.isCorrect?'c':'w',fbT=info?.isCorrect?'✓ 정답입니다!':'✗ 오답입니다.';
+  const fb=isAns?`<div class="fb ${fbCls} show"><div class="fb-title">${fbT}</div>${q.exp}</div>`:'<div class="fb"></div>';
+  return`<div class="q-card" id="qc${idx}"><div class="q-header"><span class="q-num">문제 ${idx+1}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.q}</div><div class="options">${opts}</div>${fb}</div>`;
 }
-function renderQuiz(){
+function loadMore(){
+  if(loading)return;loading=true;
   const main=document.getElementById('quiz-main');
-  const filtered=filterCat==="전체"?questions.map((q,i)=>({q,i})):questions.map((q,i)=>({q,i})).filter(({q})=>q.cat===filterCat);
-  if(results.every(r=>r!==null)&&filterCat==="전체"){showResult();return}
-  main.innerHTML=filtered.map(({q,i})=>renderCard(q,i)).join('');
+  const qs=getNextQuestions(BATCH);
+  qs.forEach(q=>{questionStore[globalIdx]=q;main.insertAdjacentHTML('beforeend',renderCard(q,globalIdx));globalIdx++});
+  loading=false;
 }
 function selectAnswer(idx,oi){
-  if(answered[idx])return;
-  answered[idx]=true;results[idx]=(oi===questions[idx].ans);window._ua[idx]=oi;
+  if(answeredMap[idx])return;
+  const q=questionStore[idx],isCorrect=oi===q.ans;
+  answeredMap[idx]={sel:oi,isCorrect};
+  if(isCorrect)correct++;else wrong++;
   updateStats();
   const card=document.getElementById(`qc${idx}`);
-  if(card)card.outerHTML=renderCard(questions[idx],idx);
-  if(results.every(r=>r!==null))setTimeout(()=>{if(!document.getElementById('rc'))document.getElementById('quiz-main').insertAdjacentHTML('beforeend',buildResult())},400);
+  if(card)card.outerHTML=renderCard(q,idx);
 }
-function scrollNext(idx){const el=document.getElementById(`qc${idx+1}`);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
-function buildResult(){
-  const c=results.filter(r=>r===true).length,pct=Math.round(c/DAILY*100);
-  const e=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'📚':'💪';
-  const msg=pct>=90?'완벽합니다! 귀화 시험 합격이 확실해요.':pct>=70?'훌륭해요! 조금만 더 다듬으면 합격입니다.':pct>=50?'좋은 출발이에요. 꾸준히 복습하면 됩니다.':'포기하지 마세요! 매일 꾸준히 풀면 반드시 합격합니다.';
-  return`<div class="result-card" id="rc"><div class="result-emoji">${e}</div><div class="result-title">오늘의 결과</div><div class="result-score">${pct}<span style="font-size:28px">점</span></div><div class="result-grid"><div class="result-stat"><span style="color:var(--green)">${c}</span>정답</div><div class="result-stat"><span style="color:var(--red)">${DAILY-c}</span>오답</div></div><p class="result-msg">${msg}<br><br>내일 새로운 문제 세트가 기다립니다!</p><button class="btn-retry" onclick="retryToday()">오늘 문제 다시 풀기</button></div>`;
-}
-function showResult(){
-  const main=document.getElementById('quiz-main');
-  if(!document.getElementById('rc'))main.insertAdjacentHTML('beforeend',buildResult());
-  document.getElementById('rc').scrollIntoView({behavior:'smooth',block:'center'});
-}
-function retryToday(){answered=new Array(DAILY).fill(false);results=new Array(DAILY).fill(null);window._ua={};updateStats();renderQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+window.addEventListener('scroll',()=>{
+  const scrollY=window.scrollY+window.innerHeight,docH=document.documentElement.scrollHeight;
+  if(scrollY>docH-600)loadMore();
+  document.getElementById('scrollTopBtn').classList.toggle('show',window.scrollY>400);
+},{passive:true});
 
-updateDateBar();setInterval(updateDateBar,30000);
-updateStats();renderCats();renderQuiz();
+refillPool();renderCats();updateStats();loadMore();
 </script>
 </body>
 </html>
